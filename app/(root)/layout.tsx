@@ -17,7 +17,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       </div> */}
 
         {/* Icons */}
-        <Card className="hidden lg:flex rounded-3xl w-[100px]  px-4 lg:my-7 lg:h-[91vh] xl:h-[92vh] 2xl:h-[93vh] 3xl:h-[94vh] overflow-y-auto custom-scrollbar pb-16">
+        <Card className="hidden xl:flex rounded-3xl w-[100px]  px-4 lg:my-7 lg:h-[91vh] xl:h-[92vh] 2xl:h-[93vh] 3xl:h-[94vh] overflow-y-auto custom-scrollbar pb-16">
           <Sidebar />
         </Card>
 
@@ -40,7 +40,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         {/* ---------- Settings ---------- */}
         <div className="lg:w-[17.19vw] flex flex-col lg:gap-5 lg:h-[92vh] lg:my-7">
           <Profile />
-          <Card className="lg:h-[86vh] hidden md:flex bg-white rounded-2xl">
+          <Card className="lg:h-[86vh] hidden lg:flex bg-white rounded-2xl">
             Settings
           </Card>
         </div>

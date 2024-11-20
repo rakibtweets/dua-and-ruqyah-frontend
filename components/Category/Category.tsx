@@ -28,7 +28,7 @@ const Category = async () => {
               >
                 <div className="flex justify-between items-center gap-4">
                   <div className="flex justify-center items-center gap-4">
-                    <div className="p-3 bg-[#CFE0E5] rounded-md">
+                    <div className="p-3 min-h-10 min-w-10 bg-[#CFE0E5] rounded-md">
                       <Image
                         src="./icons/category-icon.svg"
                         width={40}
