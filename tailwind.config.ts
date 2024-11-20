@@ -52,7 +52,7 @@ export default {
         }
       },
       screens: {
-        '3xl': '2048px'
+        '3xl': '1640px'
       },
       fontFamily: {
         inter: ['var(--font-inter)'],

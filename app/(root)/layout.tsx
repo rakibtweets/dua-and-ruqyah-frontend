@@ -1,39 +1,49 @@
 import { BreakPointIndicator } from '@/components/BreakPointIndicator/BreakPointIndicator';
+import Profile from '@/components/Profile/Profile';
+import SearchBar from '@/components/SearchBar/SearchBar';
 import MobileNav from '@/components/shared/navnar/MobileNav';
-import Navbar from '@/components/shared/navnar/Navbar';
+import Sidebar from '@/components/shared/sidebar/sidebar';
+import { Card } from '@/components/ui/card';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="z-0  lg:inset-x-0 xl:inset-x-0 xl:p-6 xl:pb-0 2xl:px-10 2xl:pt-6 2xl:inset-x-0 3xl:p-10 3xl:pb-0 d 3xl:inset-x-0">
+    <main className="z-0 p-4 lg:p-0 ">
       {/* <Navbar /> */}
-      <div className=" h-16 rounded-3xl text-center">
-        <MobileNav />
-        <Navbar />
-      </div>
       <div className="flex flex-col  lg:flex-row lg:overflow-hidden justify-center gap-8">
+        <MobileNav />
+        {/* <div className=" h-16 rounded-3xl text-center">
+        <Navbar />
+      </div> */}
         {/* Icons */}
-        <div className="bg-green-500 rounded-3xl px-4 dark:bg-dark-bg lg:h-[calc(85vh)] xl:h-[85vh] 2xl:h-[85vh] 3xl:h-[85vh] scrl-left pb-16">
-          <div className="flex flex-col mt-7 mb-10 2xl:mb-16 gap-y-6 container">
-            <div>Logo</div>
-            <div>Icons</div>
-            <div>Icons</div>
-            <div>Icons</div>
-            <div>Icons</div>
-            <div>Icons</div>
-          </div>
-        </div>
+        <Card className="hidden lg:flex rounded-3xl w-[100px]  px-4 lg:my-7 lg:h-[90vh] xl:h-[90vh] 2xl:h-[85vh] 3xl:h-[85vh] overflow-y-auto custom-scrollbar pb-16">
+          <Sidebar />
+        </Card>
         {/* categories */}
-        <div className=" bg-orange-500 text-center rounded-3xl h-[85vh] z-0 lg:w-[350px] xl:w-[350px] 2xl:w-[350px] 3xl:w-[350px] overflow-hidden  rounded-2lg  xs:hidden  xs:h-screen sm:h-screen lg:h-[85vh] xl:h-[85vh] 2xl:h-[85vh]">
-          Categories
+        <div className="lg:w-[22.34vw] flex flex-col lg:gap-5 lg:h-[92vh] lg:my-7">
+          <h1 className="h-[6vh] hidden lg:flex font-poppins text-[22px] text-[#393939]">
+            Dua Page
+          </h1>
+          <Card className="lg:h-[86vh] hidden lg:flex bg-white rounded-lg lg:rounded-xl">
+            Category
+          </Card>
         </div>
         {/* content */}
-        <section className="flex bg-blue-400 min-h-screen flex-1 flex-col px-4 pb-6  max-md:pb-14 sm:px-14">
-          <div className="mx-auto w-full max-w-5xl">{children}</div>
-        </section>
+        <div className="lg:w-[46.35vw] flex flex-col lg:gap-5 lg:h-[92vh] lg:mt-7">
+          <div className="h-[6vh] hidden lg:flex justify-end">
+            <SearchBar />
+          </div>
+          <div className="lg:h-fit overflow-y-auto rounded-lg lg:rounded-xl bg-white">
+            {children}
+          </div>
+        </div>
 
         {/* setting */}
-        <div className=" bg-cyan-500 text-center rounded-3xl h-[85vh] z-0 lg:w-[350px] xl:w-[350px] 2xl:w-[350px] 3xl:w-[350px] overflow-hidden  rounded-2lg  xs:hidden  xs:h-screen sm:h-screen lg:h-[85vh] xl:h-[85vh] 2xl:h-[85vh]">
-          settings
+        {/* ---------- Settings ---------- */}
+        <div className="lg:w-[17.19vw] flex flex-col lg:gap-5 lg:h-[92vh] lg:my-7">
+          <Profile />
+          <Card className="lg:h-[86vh] hidden md:flex bg-white rounded-2xl">
+            Settings
+          </Card>
         </div>
       </div>
       <BreakPointIndicator />
