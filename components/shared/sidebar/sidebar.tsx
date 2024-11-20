@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const Sidebar = () => {
   return (
-    <div className="flex  flex-col justify-between items-center mt-7  ">
+    <div className="flex  flex-col justify-between items-center mt-7 ">
       <div className=" mb-10 xl:mb-16 2xl:mb-16 3xl:mb-24">
         <Image src="/icons/brand-logo.svg" alt="logo" width={73} height={73} />
       </div>

@@ -15,7 +15,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <Navbar />
       </div> */}
         {/* Icons */}
-        <Card className="hidden lg:flex rounded-3xl w-[100px]  px-4 lg:my-7 lg:h-[90vh] xl:h-[90vh] 2xl:h-[85vh] 3xl:h-[85vh] overflow-y-auto custom-scrollbar pb-16">
+        <Card className="hidden lg:flex rounded-3xl w-[100px]  px-4 lg:my-7 lg:h-[91vh] xl:h-[92vh] 2xl:h-[93vh] 3xl:h-[94vh] overflow-y-auto custom-scrollbar pb-16">
           <Sidebar />
         </Card>
         {/* categories */}
