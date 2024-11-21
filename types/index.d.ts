@@ -3,3 +3,9 @@ export interface SidebarLink {
   route: string;
   label: string;
 }
+
+export interface ISettingsCard {
+  id: number;
+  icon: string;
+  label: string;
+}

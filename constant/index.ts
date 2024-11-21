@@ -1,4 +1,4 @@
-import { SidebarLink } from '@/types';
+import { ISettingsCard, SidebarLink } from '@/types';
 
 export const sidebarLinks: SidebarLink[] = [
   {
@@ -35,5 +35,28 @@ export const sidebarLinks: SidebarLink[] = [
     imgURL: '/icons/book.svg',
     route: '/book',
     label: 'Books'
+  }
+];
+
+export const settingsCards: ISettingsCard[] = [
+  {
+    id: 1,
+    icon: '/icons/language.svg',
+    label: 'Language Settings'
+  },
+  {
+    id: 2,
+    icon: '/icons/general.svg',
+    label: 'General Settings'
+  },
+  {
+    id: 3,
+    icon: '/icons/menu.svg',
+    label: 'Font Settings'
+  },
+  {
+    id: 4,
+    icon: '/icons/menu.svg',
+    label: 'Appearance Settings'
   }
 ];

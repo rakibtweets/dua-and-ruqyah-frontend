@@ -2,6 +2,7 @@ import { BreakPointIndicator } from '@/components/BreakPointIndicator/BreakPoint
 import Category from '@/components/Category/Category';
 import Profile from '@/components/Profile/Profile';
 import SearchBar from '@/components/SearchBar/SearchBar';
+import Settings from '@/components/Settings/Settings';
 import MobileNav from '@/components/shared/navnar/MobileNav';
 import Sidebar from '@/components/shared/sidebar/sidebar';
 import { Card } from '@/components/ui/card';
@@ -40,9 +41,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         {/* ---------- Settings ---------- */}
         <div className="lg:w-[17.19vw] flex flex-col lg:gap-5 lg:h-[92vh] lg:my-7">
           <Profile />
-          <Card className="lg:h-[86vh] hidden lg:flex bg-white rounded-2xl">
-            Settings
-          </Card>
+          <Settings />
         </div>
       </div>
       <BreakPointIndicator />
