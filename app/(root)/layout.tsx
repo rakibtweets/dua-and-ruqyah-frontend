@@ -32,8 +32,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <div className="h-[6vh] hidden lg:flex justify-end">
             <SearchBar />
           </div>
-          <div className="lg:h-fit overflow-y-auto rounded-lg lg:rounded-xl bg-white">
-            {children}
+          <div className="overflow-y-auto custom-scrollbar">
+            <div className="lg:h-fit  rounded-lg lg:rounded-xl mr-2">
+              {children}
+            </div>
           </div>
         </div>
 

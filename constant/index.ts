@@ -1,4 +1,4 @@
-import { ISettingsCard, SidebarLink } from '@/types';
+import { IDuaCardLinks, ISettingsCard, SidebarLink } from '@/types';
 
 export const sidebarLinks: SidebarLink[] = [
   {
@@ -58,5 +58,32 @@ export const settingsCards: ISettingsCard[] = [
     id: 4,
     icon: '/icons/menu.svg',
     label: 'Appearance Settings'
+  }
+];
+export const duaCardLinks: IDuaCardLinks[] = [
+  {
+    id: 1,
+    icon: '/icons/copy-clipboard.svg',
+    label: 'Copy'
+  },
+  {
+    id: 2,
+    icon: '/icons/bookmark.svg',
+    label: 'Bookmark'
+  },
+  {
+    id: 3,
+    icon: '/icons/bulb.svg',
+    label: 'Memorize'
+  },
+  {
+    id: 4,
+    icon: '/icons/share-icon.svg',
+    label: 'Share'
+  },
+  {
+    id: 5,
+    icon: '/icons/question-ask.svg',
+    label: 'Dua Info'
   }
 ];

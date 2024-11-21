@@ -9,3 +9,8 @@ export interface ISettingsCard {
   icon: string;
   label: string;
 }
+export interface IDuaCardLinks {
+  id: number;
+  icon: string;
+  label: string;
+}
