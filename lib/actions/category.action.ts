@@ -5,3 +5,11 @@ export const getCategories = async () => {
   const data = await res.json();
   return data;
 };
+
+export const getSubCategories = async (subCatId: number) => {
+  const res = await fetch(
+    `http://localhost:5000/subcategories/${subCatId}/subcategories`
+  );
+  const data = await res.json();
+  return data;
+};

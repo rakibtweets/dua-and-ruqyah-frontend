@@ -3,13 +3,13 @@
 import { getCategories } from '@/lib/actions/category.action';
 import CategorySearch from '../SearchBar/CategorySearch';
 import { Card } from '../ui/card';
-import Image from 'next/image';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger
 } from '../ui/accordion';
+import CategoryCard from '../CategoryCard/CategoryCard';
 
 const duaItems = [
   'What is Dua',
@@ -46,34 +46,12 @@ const Category = async () => {
               >
                 <AccordionItem className="border-none" value={item?.id}>
                   <AccordionTrigger className="hover:no-underline p-0">
-                    <div className="flex bg-[#E8F0F5] px-3 py-3 rounded-xl w-full justify-between items-center gap-2">
-                      <div className="flex justify-center items-center gap-4">
-                        <div className="p-3 min-h-10 min-w-10 bg-[#CFE0E5] rounded-md">
-                          <Image
-                            src="./icons/category-icon.svg"
-                            width={40}
-                            height={40}
-                            alt="category"
-                          />
-                        </div>
-                        <div className="flex flex-col gap-1">
-                          <h4 className="text-[#393939] font-inter font-bold text-base sm:text-sm">
-                            {item?.cat_name_en}
-                          </h4>
-                          <p className="text-xs text-[#7E7E7E]  dark:text-dark-text xs:text-[11px]">
-                            Subcategoy: {item?.no_of_subcat}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col justify-center items-center gap-1 p-2 border-l-2 border-l-[#E2E2E2]">
-                        <h4 className="text-[#393939] font-inter font-bold text-base sm:text-sm">
-                          21
-                        </h4>
-                        <p className="text-xs text-[#7E7E7E]  dark:text-dark-text xs:text-[11px]">
-                          Duas
-                        </p>
-                      </div>
-                    </div>
+                    <CategoryCard
+                      catNameEn={item?.cat_name_en}
+                      noOfSubcat={item?.no_of_subcat}
+                      categoryId={item?.id}
+                      noOfDua={item?.no_of_dua}
+                    />
                   </AccordionTrigger>
                   <AccordionContent>
                     <ul className="pl-4 pt-2">
