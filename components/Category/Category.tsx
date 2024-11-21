@@ -1,3 +1,4 @@
+'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-no-comment-textnodes */
 import { getCategories } from '@/lib/actions/category.action';
@@ -10,19 +11,21 @@ import {
   AccordionTrigger
 } from '../ui/accordion';
 import CategoryCard from '../CategoryCard/CategoryCard';
+import { useEffect, useState } from 'react';
 
-const duaItems = [
-  'What is Dua',
-  'Conditions for Dua to be successful',
-  'The Methode Of Dua',
-  'Before Dua',
-  'During Dua',
-  "Prerequisites of writing Dua and drinking it's water",
-  'The correct way to perform Dua for a small child'
-];
+const Category = () => {
+  const [categories, setCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
 
-const Category = async () => {
-  const categories = await getCategories();
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categories = await getCategories();
+      setCategories(categories);
+    };
+
+    fetchCategories();
+  }, []);
+
   return (
     <>
       <h1 className="h-[6vh] hidden lg:flex font-poppins text-[22px] text-[#393939]">
@@ -51,18 +54,21 @@ const Category = async () => {
                       noOfSubcat={item?.no_of_subcat}
                       categoryId={item?.id}
                       noOfDua={item?.no_of_dua}
+                      setSubCategories={setSubCategories}
                     />
                   </AccordionTrigger>
                   <AccordionContent>
                     <ul className="pl-4 pt-2">
-                      {duaItems.map((item, index) => (
+                      {subCategories?.map((item: any) => (
                         <li
-                          key={index}
+                          key={item.id}
                           className="flex items-center py-3 relative cursor-pointer"
                         >
                           <div className="absolute left-0.5 top-0 bottom-0 border-l-2 border-dotted border-green-300"></div>
                           <div className="flex-shrink-0 w-2 h-2 bg-green-500 rounded-full mr-4 relative z-10"></div>
-                          <span className="text-gray-700 text-sm">{item}</span>
+                          <span className="text-gray-700 text-sm">
+                            {item?.subcat_name_en}
+                          </span>
                         </li>
                       ))}
                     </ul>
