@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from 'next/image';
 import { Card, CardFooter } from '../ui/card';
 import { duaCardLinks } from '@/constant';
 
-const DuaCard = () => {
-  const dua_arabic = true;
-  const transliteration_en = true;
-  const translation_en = true;
+const DuaCard = ({ dua }: any) => {
   return (
-    <Card className="rounded-xl shadow-none py-4 px-7">
+    <Card
+      id={dua.subcat_id + dua.cat_id + dua.dua_id}
+      className="rounded-xl shadow-none py-4 px-7"
+    >
       {/* Title */}
       <div className="flex gap-3 items-center">
         <div>
@@ -19,48 +20,32 @@ const DuaCard = () => {
           />
         </div>
         <h4 className="font-bold h4 font-inter text-primary-foreground ">
-          Title: Lorem ipsum dolor sit amet.
+          {dua?.id}. {dua?.dua_name_en}
         </h4>
       </div>
       {/* Description */}
       <div className="flex flex-col mt-5 lg:mt-7 gap-5 lg:gap-7">
         <p className="font-normal text-lg leading-6 lg:leading-8 font-inter text-justify text-secondary-foreground">
-          Prophet (ﷺ) used to say after every compulsory prayer, The servant
-          will ask his Lord for all of his religiously and worldly needs,
-          because the treasure of all things is in the hands of Allah. Allah
-          says (interpretation of the meaning): “And there is not a thing but
-          that with Us are its depositories, and We do not send it down except
-          according to a known measure.” (Sura Al-Hijr 15:21) No one can
-          withhold what Allah gives; And, no one can give what he resists.
+          {dua.top_en}
         </p>
         {/* Arabic */}
-        {dua_arabic && (
+        {dua.dua_arabic && (
           <p className="font-normal text-3xl leading-9 lg:leading-10 font-inter text-right text-secondary-foreground">
-            لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيْكَ لَهُ، لَهُ الْمُلْكُ
-            وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اَللَّهُمَّ لَا
-            مَانِعَ لِمَا أَعْطَيْتَ وَلَا مُعْطِيَ لِمَا مَنَعْتَ وَلَا
-            يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ
+            {dua.dua_arabic}
           </p>
         )}
         {/* Transliteration */}
-        {transliteration_en && (
+        {dua.transliteration_en && (
           <p className="font-normal text-base leading-5 italic lg:leading-6 font-inter text-justify text-secondary-foreground">
             <span className="font-bold text-lg">Transliteration: </span>
-            Laa ilaaha illallahu wahdahu laa sharika lahu, lahul-mulku wa
-            lahul-hamdu wa huwa &apos;alaa kulli shay&apos;in qadir. Allaahumma
-            laa maani&apos;a limaa a&apos;taita wa laa mu&apos;tia limaa
-            mana&apos;ta wa laa yanfa&apos;u dhal-jaddi minka al-jaddu
+            {dua.transliteration_en}
           </p>
         )}
         {/* Transilation */}
-        {translation_en && (
+        {dua.translation_en && (
           <p className="font-normal text-base leading-5 font-inter text-justify text-secondary-foreground">
             <span className="font-bold text-lg">Translation: </span>There is
-            none worthy of worship but Allah alone, Who has no partner, His is
-            the dominion and His is the praise, and He is Able to do all things.
-            O Allah! None can withhold what You give, and none can give what You
-            withhold, and the might of the mighty person cannot benefit him
-            against You.
+            {dua.translation_en}
           </p>
         )}
 
@@ -69,7 +54,7 @@ const DuaCard = () => {
           <p className="font-semibold text-lg leading-5 font-inter text-justify text-[#1FA45B]">
             Reference
           </p>
-          <p className="text-[#393939] font-semibold">Bukhari: 844</p>
+          <p className="text-[#393939] font-semibold">{dua.refference_en}</p>
         </div>
       </div>
       {/* Footer */}
