@@ -5,7 +5,7 @@ import { duaCardLinks } from '@/constant';
 
 const DuaCard = ({ dua }: any) => {
   return (
-    <Card id={dua.dua_id} className="rounded-xl shadow-none py-4 px-7">
+    <Card className="rounded-xl shadow-none py-4 px-7">
       {/* Title */}
       <div className="flex gap-3 items-center">
         <div>
