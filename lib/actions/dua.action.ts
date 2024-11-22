@@ -12,13 +12,13 @@ export const getDuas = async ({ cat, subcat, dua }: IgetCategoriesProps) => {
   let url: string;
 
   if (cat && subcat && dua) {
-    url = `http://localhost:5000/duas/${dua}`;
+    url = `${process.env.BACKEND_SERVER_URL}/duas/${dua}`;
   } else if (cat && subcat) {
-    url = `http://localhost:5000/subcategories/${subcat}/duas`;
+    url = `${process.env.BACKEND_SERVER_URL}/subcategories/${subcat}/duas`;
   } else if (cat) {
-    url = `http://localhost:5000/categories/${cat}/duas`;
+    url = `${process.env.BACKEND_SERVER_URL}/categories/${cat}/duas`;
   } else {
-    url = `http://localhost:5000/duas`;
+    url = `${process.env.BACKEND_SERVER_URL}/duas`;
   }
   console.log(url);
   const res = await fetch(url);
@@ -27,7 +27,9 @@ export const getDuas = async ({ cat, subcat, dua }: IgetCategoriesProps) => {
 };
 
 export const getDuasBySubCategory = async (subcat: number) => {
-  const res = await fetch(`http://localhost:5000/subcategories/${subcat}/duas`);
+  const res = await fetch(
+    `${process.env.BACKEND_SERVER_URL}/subcategories/${subcat}/duas`
+  );
   const data = await res.json();
   return data;
 };
