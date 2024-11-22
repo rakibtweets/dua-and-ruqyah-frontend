@@ -24,7 +24,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
         {/* categories */}
         <div className="lg:w-[22.34vw] flex flex-col lg:gap-5  lg:my-7">
-          <Category />
+          <h1 className="h-[6vh] hidden lg:flex font-poppins text-[22px] text-[#393939]">
+            Dua Page
+          </h1>
+          <div className="hidden lg:block">
+            <Category />
+          </div>
         </div>
 
         {/* content */}
@@ -43,7 +48,9 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         {/* ---------- Settings ---------- */}
         <div className="lg:w-[17.19vw] flex flex-col lg:gap-5 lg:h-[92vh] lg:my-7">
           <Profile />
-          <Settings />
+          <div className="hidden lg:block">
+            <Settings />
+          </div>
         </div>
       </div>
       <BreakPointIndicator />

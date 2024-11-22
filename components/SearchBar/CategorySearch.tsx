@@ -3,7 +3,7 @@ import { Input } from '../ui/input';
 
 const CategorySearch = () => {
   return (
-    <div className="relative mx-2">
+    <div className="relative mx-2 mt-3">
       {/* Search Icon */}
       <div className="absolute inset-y-0 left-0 flex items-center pl-3">
         <Search className="text-s" size={22} />

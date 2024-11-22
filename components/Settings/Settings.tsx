@@ -5,11 +5,11 @@ import { Switch } from '../ui/switch';
 
 const Settings = () => {
   return (
-    <Card className="lg:h-[86vh] hidden lg:block bg-white rounded-2xl ">
+    <Card className="lg:h-[86vh] bg-white rounded-2xl pb-4">
       <div className="text-center w-full mt-9">
         <h2 className="font-semibold text=[#393939]">Settings</h2>
       </div>
-      <div className="flex flex-col gap-4 mx-4 mt-6 ">
+      <div className="flex flex-col gap-4 mx-4 mt-6 overflow-y-auto custom-scrollbar">
         {settingsCards.map((card) => (
           <Card
             key={card.id}

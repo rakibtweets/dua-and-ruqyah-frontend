@@ -63,17 +63,14 @@ const Category = () => {
 
   return (
     <>
-      <h1 className="h-[6vh] hidden lg:flex font-poppins text-[22px] text-[#393939]">
-        Dua Page
-      </h1>
-      <Card className=" hidden max-w-[430px] lg:flex flex-col gap-4 bg-white rounded-lg lg:rounded-xl lg:h-[83vh] xl:h-[84vh] 2xl:h-[85vh] 3xl:h-[86vh]">
+      <Card className="max-w-[430px] lg:flex flex-col gap-4 bg-white rounded-lg lg:rounded-xl lg:h-[83vh] xl:h-[84vh] 2xl:h-[85vh] 3xl:h-[86vh]">
         <div className="bg-[#1FA45B] w-full rounded-tr-xl rounded-tl-xl h-14 py-8 flex justify-center items-center">
           <p className="text-white text-base">Categories</p>
         </div>
         <CategorySearch />
         {/* Dua Category */}
 
-        <div className=" flex flex-col w-full gap-4  overflow-y-auto custom-scrollbar ">
+        <div className=" flex flex-col w-full gap-4 py-4 overflow-y-auto custom-scrollbar ">
           {isLoading
             ? ['cat1', 'cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7'].map(
                 (i) => <CategoryCardSkeleton key={i} />
@@ -83,7 +80,7 @@ const Category = () => {
                   <Accordion
                     type="single"
                     collapsible
-                    key={item?.id}
+                    key={item?.cat_name_en}
                     className="mx-2 p-0"
                   >
                     <AccordionItem className="border-none" value={item?.id}>
@@ -106,9 +103,9 @@ const Category = () => {
                                 'subcat4',
                                 'subcat5'
                               ].map((i) => <SubCategorySkeleton key={i} />)
-                            : subCategories?.map((item: any) => (
+                            : subCategories?.map((item: any, index: number) => (
                                 <li
-                                  key={item.id}
+                                  key={`${item.id}-${index}`}
                                   onClick={(e) => {
                                     e.preventDefault();
                                     e.stopPropagation();
@@ -138,10 +135,10 @@ const Category = () => {
                                         </AccordionTrigger>
                                         <AccordionContent className="py-2">
                                           {subCategoriesDuas?.map(
-                                            (dua: any) => {
+                                            (dua: any, index: number) => {
                                               return (
                                                 <div
-                                                  key={dua.id}
+                                                  key={`${item.id}-${index}`}
                                                   onClick={(e) => {
                                                     e.preventDefault();
                                                     e.stopPropagation();

@@ -1,5 +1,13 @@
+import Category from '@/components/Category/Category';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger
+} from '@/components/ui/sheet';
 import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
-import { ChevronDown, Menu, Settings } from 'lucide-react';
+import { ChevronDown, Settings as SettingIcon, Menu } from 'lucide-react';
+import Settings from '../../Settings/Settings';
 
 const MobileNav = () => {
   return (
@@ -8,7 +16,20 @@ const MobileNav = () => {
         <div className="flex justify-between items-center py-5 px-3">
           <p className="text-lg">Duas Page</p>
           <div className="flex items-center justify-center gap-3">
-            <Settings className="cursor-pointer text-primary" size={24} />
+            <Sheet>
+              <SheetTrigger>
+                <SettingIcon
+                  className="cursor-pointer text-primary"
+                  size={24}
+                />
+              </SheetTrigger>
+              <SheetContent>
+                <SheetClose asChild>
+                  <Settings />
+                </SheetClose>
+              </SheetContent>
+            </Sheet>
+
             <div className="flex items-center justify-center">
               <Avatar className="cursor-pointer">
                 <AvatarImage
@@ -24,8 +45,17 @@ const MobileNav = () => {
           </div>
         </div>
         <div className="flex flex-row items-center gap-2 py-5 px-3 bg-white rounded-md">
-          <Menu size={24} />
-          <p>Dua Categories</p>
+          <Sheet>
+            <SheetTrigger>
+              <div className="flex gap-4 items-center">
+                <Menu size={24} />
+                <p>Dua Categories</p>
+              </div>
+            </SheetTrigger>
+            <SheetContent side="left">
+              <Category />
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
     </div>

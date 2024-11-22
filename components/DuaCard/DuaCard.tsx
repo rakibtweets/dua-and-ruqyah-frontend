@@ -66,7 +66,7 @@ const DuaCard = ({ dua }: any) => {
           />
         </div>
         <div className="flex gap-10">
-          {duaCardLinks.map((link) => (
+          {duaCardLinks?.map((link) => (
             <div key={link.id} className="cursor-pointer">
               <Image src={link.icon} width={24} height={24} alt={link.label} />
             </div>
