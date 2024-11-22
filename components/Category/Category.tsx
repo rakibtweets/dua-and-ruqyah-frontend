@@ -16,17 +16,27 @@ import { formUrlQuery } from '@/lib/utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import CategoryCardSkeleton from '../Skeletons/CategoryCardSkeletion';
 import SubCategorySkeleton from '../Skeletons/SubCategorySkeleton';
+import Image from 'next/image';
+import { getDuasBySubCategory } from '@/lib/actions/dua.action';
 
 const Category = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  // const [categories, setCategories] = useState([]);
-  // const [subCategories, setSubCategories] = useState([]);
 
   const handleSubCategoryClick = async (item: number) => {
     const newUrl = formUrlQuery({
       params: searchParams.toString(),
       key: 'subcat',
+      value: item.toString()
+    });
+
+    router.push(newUrl, { scroll: false });
+  };
+
+  const handleDuaClick = async (item: number) => {
+    const newUrl = formUrlQuery({
+      params: searchParams.toString(),
+      key: 'dua',
       value: item.toString()
     });
 
@@ -45,6 +55,11 @@ const Category = () => {
   } = useMutation({
     mutationFn: getSubCategories
   });
+
+  const { mutate: fetchDuasBySubCategories, data: subCategoriesDuas } =
+    useMutation({
+      mutationFn: getDuasBySubCategory
+    });
 
   return (
     <>
@@ -94,15 +109,64 @@ const Category = () => {
                             : subCategories?.map((item: any) => (
                                 <li
                                   key={item.id}
-                                  onClick={() =>
-                                    handleSubCategoryClick(item.id)
-                                  }
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    handleSubCategoryClick(item.id);
+                                  }}
                                   className="flex items-center py-3 relative cursor-pointer"
                                 >
                                   <div className="absolute left-0.5 top-0 bottom-0 border-l-2 border-dotted border-green-300"></div>
                                   <div className="flex-shrink-0 w-2 h-2 bg-green-500 rounded-full mr-4 relative z-10"></div>
                                   <span className="text-gray-700 text-sm">
-                                    {item?.subcat_name_en}
+                                    <Accordion
+                                      type="single"
+                                      collapsible
+                                      className="w-full"
+                                    >
+                                      <AccordionItem
+                                        className="border-none"
+                                        value="item-1"
+                                      >
+                                        <AccordionTrigger
+                                          onClick={() =>
+                                            fetchDuasBySubCategories(item.id)
+                                          }
+                                          className="hover:no-underline p-0"
+                                        >
+                                          {item?.subcat_name_en}
+                                        </AccordionTrigger>
+                                        <AccordionContent className="py-2">
+                                          {subCategoriesDuas?.map(
+                                            (dua: any) => {
+                                              return (
+                                                <div
+                                                  key={dua.id}
+                                                  onClick={(e) => {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    handleDuaClick(dua.id);
+                                                  }}
+                                                  className="flex items-center  gap-3"
+                                                >
+                                                  <div>
+                                                    <Image
+                                                      src="/icons/duaarrow.svg"
+                                                      alt="dua"
+                                                      width={16}
+                                                      height={16}
+                                                    />
+                                                  </div>
+                                                  <p className="py-2">
+                                                    {dua?.dua_name_en}
+                                                  </p>
+                                                </div>
+                                              );
+                                            }
+                                          )}
+                                        </AccordionContent>
+                                      </AccordionItem>
+                                    </Accordion>
                                   </span>
                                 </li>
                               ))}
