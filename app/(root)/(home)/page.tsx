@@ -1,10 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import DuaCard from '@/components/DuaCard/DuaCard';
 import { getDuas } from '@/lib/actions/dua.action';
-import { SearchParamsProps } from '@/types';
 
-export default async function Home({ searchParams }: SearchParamsProps) {
+type SearchParams = Promise<{
+  cat?: string;
+  subcat?: string;
+  dua?: string;
+}>;
+
+export default async function Home(props: { searchParams: SearchParams }) {
+  const searchParams = await props.searchParams;
   const { cat, subcat, dua } = searchParams;
+
   const duas = await getDuas({
     cat: cat || '',
     subcat: subcat || '',
