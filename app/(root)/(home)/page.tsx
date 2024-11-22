@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import DuaCard from '@/components/DuaCard/DuaCard';
 import { getDuas } from '@/lib/actions/dua.action';
+import { Suspense } from 'react';
 
 type SearchParams = Promise<{
   cat?: string;
@@ -18,10 +19,12 @@ export default async function Home(props: { searchParams: SearchParams }) {
     dua: dua || ''
   });
   return (
-    <div className="flex flex-col gap-4">
-      {duas?.map((dua: any) => (
-        <DuaCard key={dua.id} dua={dua} />
-      ))}
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="flex flex-col gap-4">
+        {duas?.map((dua: any) => (
+          <DuaCard key={dua.id} dua={dua} />
+        ))}
+      </div>
+    </Suspense>
   );
 }
