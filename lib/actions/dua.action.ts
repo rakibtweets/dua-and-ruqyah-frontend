@@ -1,7 +1,5 @@
 'use server';
 
-import console from 'console';
-
 interface IgetCategoriesProps {
   cat: string | undefined;
   subcat: string | undefined;
@@ -20,7 +18,7 @@ export const getDuas = async ({ cat, subcat, dua }: IgetCategoriesProps) => {
   } else {
     url = `${process.env.BACKEND_SERVER_URL}/duas`;
   }
-  console.log(url);
+
   const res = await fetch(url);
   const data = await res.json();
   return data;
