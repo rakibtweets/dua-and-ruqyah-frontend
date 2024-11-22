@@ -12,10 +12,24 @@ import {
 } from '../ui/accordion';
 import CategoryCard from '../CategoryCard/CategoryCard';
 import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { formUrlQuery } from '@/lib/utils';
 
 const Category = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
+
+  const handleSubCategoryClick = async (item: number) => {
+    const newUrl = formUrlQuery({
+      params: searchParams.toString(),
+      key: 'subcat',
+      value: item.toString()
+    });
+
+    router.push(newUrl, { scroll: false });
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -62,6 +76,7 @@ const Category = () => {
                       {subCategories?.map((item: any) => (
                         <li
                           key={item.id}
+                          onClick={() => handleSubCategoryClick(item.id)}
                           className="flex items-center py-3 relative cursor-pointer"
                         >
                           <div className="absolute left-0.5 top-0 bottom-0 border-l-2 border-dotted border-green-300"></div>
