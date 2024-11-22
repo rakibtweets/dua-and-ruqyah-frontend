@@ -10,7 +10,7 @@ export default async function Home({ searchParams }: SearchParamsProps) {
   return (
     <Suspense fallback={<div className="text-center w-full">Loading...</div>}>
       <div className="flex flex-col gap-4">
-        {duas.map((dua: any) => (
+        {duas?.map((dua: any) => (
           <DuaCard key={dua.dua_id} dua={dua} />
         ))}
       </div>

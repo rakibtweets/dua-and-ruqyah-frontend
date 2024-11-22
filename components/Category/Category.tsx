@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-no-comment-textnodes */
-import { getCategories } from '@/lib/actions/category.action';
+import { getCategories, getSubCategories } from '@/lib/actions/category.action';
 import CategorySearch from '../SearchBar/CategorySearch';
 import { Card } from '../ui/card';
 import {
@@ -11,15 +11,17 @@ import {
   AccordionTrigger
 } from '../ui/accordion';
 import CategoryCard from '../CategoryCard/CategoryCard';
-import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { formUrlQuery } from '@/lib/utils';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import CategoryCardSkeleton from '../Skeletons/CategoryCardSkeletion';
+import SubCategorySkeleton from '../Skeletons/SubCategorySkeleton';
 
 const Category = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [categories, setCategories] = useState([]);
-  const [subCategories, setSubCategories] = useState([]);
+  // const [categories, setCategories] = useState([]);
+  // const [subCategories, setSubCategories] = useState([]);
 
   const handleSubCategoryClick = async (item: number) => {
     const newUrl = formUrlQuery({
@@ -31,14 +33,18 @@ const Category = () => {
     router.push(newUrl, { scroll: false });
   };
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      const categories = await getCategories();
-      setCategories(categories);
-    };
+  const { data: categories, isLoading } = useQuery({
+    queryKey: ['categories'],
+    queryFn: getCategories
+  });
 
-    fetchCategories();
-  }, []);
+  const {
+    mutate: fetchSubCategories,
+    data: subCategories,
+    isPending: isSubCategoryLoading
+  } = useMutation({
+    mutationFn: getSubCategories
+  });
 
   return (
     <>
@@ -53,45 +59,59 @@ const Category = () => {
         {/* Dua Category */}
 
         <div className=" flex flex-col w-full gap-4  overflow-y-auto custom-scrollbar ">
-          {categories?.map((item: any) => {
-            return (
-              <Accordion
-                type="single"
-                collapsible
-                key={item?.id}
-                className="mx-2 p-0"
-              >
-                <AccordionItem className="border-none" value={item?.id}>
-                  <AccordionTrigger className="hover:no-underline p-0">
-                    <CategoryCard
-                      catNameEn={item?.cat_name_en}
-                      noOfSubcat={item?.no_of_subcat}
-                      categoryId={item?.id}
-                      noOfDua={item?.no_of_dua}
-                      setSubCategories={setSubCategories}
-                    />
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <ul className="pl-4 pt-2">
-                      {subCategories?.map((item: any) => (
-                        <li
-                          key={item.id}
-                          onClick={() => handleSubCategoryClick(item.id)}
-                          className="flex items-center py-3 relative cursor-pointer"
-                        >
-                          <div className="absolute left-0.5 top-0 bottom-0 border-l-2 border-dotted border-green-300"></div>
-                          <div className="flex-shrink-0 w-2 h-2 bg-green-500 rounded-full mr-4 relative z-10"></div>
-                          <span className="text-gray-700 text-sm">
-                            {item?.subcat_name_en}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            );
-          })}
+          {isLoading
+            ? ['cat1', 'cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7'].map(
+                (i) => <CategoryCardSkeleton key={i} />
+              )
+            : categories?.map((item: any) => {
+                return (
+                  <Accordion
+                    type="single"
+                    collapsible
+                    key={item?.id}
+                    className="mx-2 p-0"
+                  >
+                    <AccordionItem className="border-none" value={item?.id}>
+                      <AccordionTrigger className="hover:no-underline p-0">
+                        <CategoryCard
+                          catNameEn={item?.cat_name_en}
+                          noOfSubcat={item?.no_of_subcat}
+                          categoryId={item?.id}
+                          noOfDua={item?.no_of_dua}
+                          fetchSubCategories={fetchSubCategories}
+                        />
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <ul className="pl-4 pt-2">
+                          {isSubCategoryLoading
+                            ? [
+                                'subcat1',
+                                'subcat2',
+                                'subcat3',
+                                'subcat4',
+                                'subcat5'
+                              ].map((i) => <SubCategorySkeleton key={i} />)
+                            : subCategories?.map((item: any) => (
+                                <li
+                                  key={item.id}
+                                  onClick={() =>
+                                    handleSubCategoryClick(item.id)
+                                  }
+                                  className="flex items-center py-3 relative cursor-pointer"
+                                >
+                                  <div className="absolute left-0.5 top-0 bottom-0 border-l-2 border-dotted border-green-300"></div>
+                                  <div className="flex-shrink-0 w-2 h-2 bg-green-500 rounded-full mr-4 relative z-10"></div>
+                                  <span className="text-gray-700 text-sm">
+                                    {item?.subcat_name_en}
+                                  </span>
+                                </li>
+                              ))}
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                );
+              })}
         </div>
       </Card>
     </>

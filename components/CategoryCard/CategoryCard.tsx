@@ -4,14 +4,14 @@ import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { formUrlQuery } from '@/lib/utils';
 import React from 'react';
-import { getSubCategories } from '@/lib/actions/category.action';
+// import { getSubCategories } from '@/lib/actions/category.action';
 
 interface CategoryCardProps {
   catNameEn: string;
   noOfSubcat: number;
   categoryId: number;
   noOfDua: number;
-  setSubCategories: React.Dispatch<React.SetStateAction<never[]>>;
+  fetchSubCategories: (catId: number) => void;
 }
 
 const CategoryCard = ({
@@ -19,7 +19,7 @@ const CategoryCard = ({
   noOfSubcat,
   categoryId,
   noOfDua,
-  setSubCategories
+  fetchSubCategories
 }: CategoryCardProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -30,10 +30,14 @@ const CategoryCard = ({
       key: 'cat',
       value: item.toString()
     });
-    const subCategories = await getSubCategories(item);
-    setSubCategories(subCategories);
+
+    fetchSubCategories(item);
+
+    // const subCategories = await getSubCategories(item);
+    // setSubCategories(subCategories);
     router.push(newUrl, { scroll: false });
   };
+
   return (
     <div
       onClick={() => handleCategoryClick(categoryId)}
