@@ -1,9 +1,20 @@
-export default function Home() {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import DuaCard from '@/components/DuaCard/DuaCard';
+import { getDuas } from '@/lib/actions/dua.action';
+import { SearchParamsProps } from '@/types';
+
+export default async function Home({ searchParams }: SearchParamsProps) {
+  const { cat, subcat, dua } = await searchParams;
+  const duas = await getDuas({
+    cat: cat || '',
+    subcat: subcat || '',
+    dua: dua || ''
+  });
   return (
-    <p className="text-center font-inter">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Asperiores
-      beatae natus voluptatibus neque. Illum impedit rerum ab molestiae? Nulla,
-      similique.
-    </p>
+    <div className="flex flex-col gap-4">
+      {duas?.map((dua: any) => (
+        <DuaCard key={dua.id} dua={dua} />
+      ))}
+    </div>
   );
 }
