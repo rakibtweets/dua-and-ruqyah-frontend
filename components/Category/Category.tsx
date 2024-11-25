@@ -17,6 +17,8 @@ import { useMutation } from '@tanstack/react-query';
 import SubCategorySkeleton from '../Skeletons/SubCategorySkeleton';
 import Image from 'next/image';
 import { getDuasBySubCategory } from '@/lib/actions/dua.action';
+import { Suspense } from 'react';
+import CategoryCardSkeleton from '../Skeletons/CategoryCardSkeletion';
 
 const Category = ({ categories }: any) => {
   const searchParams = useSearchParams();
@@ -75,13 +77,15 @@ const Category = ({ categories }: any) => {
               >
                 <AccordionItem className="border-none" value={item?.id}>
                   <AccordionTrigger className="hover:no-underline p-0">
-                    <CategoryCard
-                      catNameEn={item?.cat_name_en}
-                      noOfSubcat={item?.no_of_subcat}
-                      categoryId={item?.id}
-                      noOfDua={item?.no_of_dua}
-                      fetchSubCategories={fetchSubCategories}
-                    />
+                    <Suspense fallback={<CategoryCardSkeleton />}>
+                      <CategoryCard
+                        catNameEn={item?.cat_name_en}
+                        noOfSubcat={item?.no_of_subcat}
+                        categoryId={item?.id}
+                        noOfDua={item?.no_of_dua}
+                        fetchSubCategories={fetchSubCategories}
+                      />
+                    </Suspense>
                   </AccordionTrigger>
                   <AccordionContent>
                     <ul className="pl-4 pt-2">
