@@ -1,9 +1,9 @@
 'use server';
 
 interface IgetCategoriesProps {
-  cat: string | undefined;
-  subcat: string | undefined;
-  dua: string | undefined;
+  cat: string | string[] | undefined;
+  subcat: string | string[] | undefined;
+  dua: string | string[] | undefined;
 }
 
 export const getDuas = async ({ cat, subcat, dua }: IgetCategoriesProps) => {

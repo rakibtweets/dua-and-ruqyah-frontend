@@ -1,5 +1,5 @@
 export interface SearchParamsProps {
-  searchParams: { [key: string]: string | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 export interface SidebarLink {

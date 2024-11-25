@@ -4,7 +4,7 @@ import { getDuas } from '@/lib/actions/dua.action';
 import { SearchParamsProps } from '@/types';
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  const { cat, subcat, dua } = searchParams;
+  const { cat, subcat, dua } = await searchParams;
 
   const duas = await getDuas({
     cat: cat || '',
