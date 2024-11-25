@@ -1,16 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import DuaCard from '@/components/DuaCard/DuaCard';
 import { getDuas } from '@/lib/actions/dua.action';
-import { Suspense } from 'react';
+import { SearchParamsProps } from '@/types';
 
-type SearchParams = Promise<{
-  cat?: string;
-  subcat?: string;
-  dua?: string;
-}>;
-
-export default async function Home(props: { searchParams: SearchParams }) {
-  const searchParams = await props.searchParams;
+export default async function Home({ searchParams }: SearchParamsProps) {
   const { cat, subcat, dua } = searchParams;
 
   const duas = await getDuas({
@@ -19,12 +12,10 @@ export default async function Home(props: { searchParams: SearchParams }) {
     dua: dua || ''
   });
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className="flex flex-col gap-4">
-        {duas?.map((dua: any) => (
-          <DuaCard key={dua.id} dua={dua} />
-        ))}
-      </div>
-    </Suspense>
+    <div className="flex flex-col gap-4">
+      {duas?.map((dua: any) => (
+        <DuaCard key={dua.id} dua={dua} />
+      ))}
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 import DuaCardSkeleton from '@/components/Skeletons/DuaCardSkeleton';
 
-const loading = () => {
+const Loading = () => {
   return (
     <div className="flex flex-col gap-5">
       {[1, 2, 3, 4, 5, 6].map((i) => (
@@ -9,4 +9,4 @@ const loading = () => {
     </div>
   );
 };
-export default loading;
+export default Loading;

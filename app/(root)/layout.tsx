@@ -6,8 +6,10 @@ import Settings from '@/components/Settings/Settings';
 import MobileNav from '@/components/shared/navnar/MobileNav';
 import Sidebar from '@/components/shared/sidebar/sidebar';
 import { Card } from '@/components/ui/card';
+import { getCategories } from '@/lib/actions/category.action';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = async ({ children }: { children: React.ReactNode }) => {
+  const categories = await getCategories();
   return (
     <main className="z-0 p-4 lg:p-0 ">
       {/* <Navbar /> */}
@@ -28,7 +30,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             Dua Page
           </h1>
           <div className="hidden lg:block">
-            <Category />
+            <Category categories={categories} />
           </div>
         </div>
 
