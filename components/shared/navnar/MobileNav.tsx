@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Category from '@/components/Category/Category';
 import {
   Sheet,
@@ -9,7 +10,7 @@ import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 import { ChevronDown, Settings as SettingIcon, Menu } from 'lucide-react';
 import Settings from '../../Settings/Settings';
 
-const MobileNav = () => {
+const MobileNav = ({ categories }: any) => {
   return (
     <div className="lg:hidden">
       <div className="flex  flex-col">
@@ -53,7 +54,7 @@ const MobileNav = () => {
               </div>
             </SheetTrigger>
             <SheetContent side="left">
-              <Category />
+              <Category categories={categories} />
             </SheetContent>
           </Sheet>
         </div>

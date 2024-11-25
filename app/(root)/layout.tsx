@@ -14,7 +14,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
     <main className="z-0 p-4 lg:p-0 ">
       {/* <Navbar /> */}
       <div className="flex flex-col  lg:flex-row lg:overflow-hidden justify-center gap-8">
-        <MobileNav />
+        <MobileNav categories={categories} />
         {/* <div className=" h-16 rounded-3xl text-center">
         <Navbar />
       </div> */}

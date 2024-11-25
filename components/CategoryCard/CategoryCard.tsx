@@ -10,6 +10,7 @@ interface CategoryCardProps {
   noOfSubcat: number;
   categoryId: number;
   noOfDua: number;
+  isCatActive?: boolean;
   fetchSubCategories: (catId: number) => void;
 }
 
@@ -18,6 +19,7 @@ const CategoryCard = ({
   noOfSubcat,
   categoryId,
   noOfDua,
+  isCatActive,
   fetchSubCategories
 }: CategoryCardProps) => {
   const searchParams = useSearchParams();
@@ -38,7 +40,9 @@ const CategoryCard = ({
   return (
     <div
       onClick={() => handleCategoryClick(categoryId)}
-      className="flex bg-[#E8F0F5] px-3 py-3 rounded-xl w-full justify-between items-center gap-2"
+      className={`flex ${
+        isCatActive ? 'bg-[#E8F0F5]' : 'bg-[#F9F9F9]'
+      } px-3 py-3 rounded-xl w-full justify-between items-center gap-2`}
     >
       <div className="flex justify-center items-center gap-4">
         <div className="p-3 min-h-10 min-w-10 bg-[#CFE0E5] rounded-md">
